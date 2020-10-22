@@ -1,12 +1,23 @@
 var path = require('path')
 var webpack = require('webpack')
 
+const NODE_ENV = process.env.NODE_ENV
+
+// function resolve(dir) {
+//   console.log(path, '-------------', path.resolve(__dirname, './dist'), '-------------', path.join(__dirname, './dist'))
+//   return path.resolve(__dirname, './dist')
+//   // return path.join(__dirname, './dist')
+// }
+
 module.exports = {
-  entry: './src/main.js',
+  entry: NODE_ENV === 'development' ? './src/main.js' : './src/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: 'charts-preview.js',
+    library: 'charts-preview',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [
@@ -32,7 +43,11 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        include: [
+          path.resolve('src'),
+          path.resolve('node_modules/vue-echarts'),
+          path.resolve('node_modules/resize-detector')
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

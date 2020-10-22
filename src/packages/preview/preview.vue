@@ -1,15 +1,9 @@
-<!--
-  @ 基于vue-echarts的图表预览组件 @
-
-  ** 1、外部可以传所有echart的参数，像使用原生Echarts一样
-  ** 2、组件大小默认是100%（自适应），所以只要在包裹组件的div中设置实际的大小即可
-  ** 3、可以指定图表大小，外部传入styleOptions:对象，宽高等信息
--->
+<!-- 基于vue-echarts的图表预览组件 -->
 <template>
   <div class="charts-preview-wrap">
     <slot name="title"></slot>
-    <span class="chatrs-name">图标名称</span>
-    <span class="chatrs-update">数据更新时间：暂无</span>
+    <span class="chatrs-name">{{ chartsName }}</span>
+    <span class="chatrs-update">数据更新时间：{{ updateTime }}</span>
     <v-chart class="charts-wrap"  v-bind="$attrs" :style="chartsStyleOptions"></v-chart>
   </div>
 </template>
@@ -27,6 +21,16 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    },
+
+    chartsName: {
+      type: String,
+      default: '图表名称'
+    },
+
+    updateTime: {
+      type: String,
+      default: '2020-10-21 12:16'
     },
 
     // 指定图表样式
@@ -69,6 +73,7 @@ export default {
   }
   .chatrs-name{
     font-size:13px;
+    font-weight: bold;
     position: absolute;
     top:5px;
     left: 5px;
@@ -76,7 +81,7 @@ export default {
   .chatrs-update{
     font-size: 12px;
     position: absolute;
-    top: 5px;
+    top: 6px;
     right: 5px;
   }
 }

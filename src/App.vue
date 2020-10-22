@@ -72,10 +72,6 @@ export default {
         }]
       }
     }
-  },
-
-  components: {
-    // chartPreview
   }
 }
 </script>
@@ -88,7 +84,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   border:1px solid #ccc;
-  width: 300px;
+  width: 400px;
   height: 300px;
 }
 
