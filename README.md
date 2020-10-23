@@ -39,11 +39,16 @@ Vue.use(previewUI)
 ---
 
 ## props
-  + ```options```
+  + ``` options ```
     
     图表信息数据，和echarts的options一致
 
-  + ```styleOptions```
+  + ``` styleOptions ```
     
     指定图表样式，宽高等内容
     ###### 在外框宽高不确定时使用，如果外框已经有样式指定宽高，图表的样式以styleOptions展示
+  
+  + ``` haveHeader ```
+
+    是否需要头部
+    

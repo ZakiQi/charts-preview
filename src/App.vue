@@ -1,11 +1,55 @@
 <template>
   <div id="app">
-    <charts-preview :data="pieData" :options="pieData" :theme="'light'" :chartsType="'pie'">
-    </charts-preview>
+    <!-- 柱状图 -->
+    <div class="charts-box">
+      <charts-preview 
+        :options="barData" 
+        :chartsName="'柱状图'"
+        :updateTime="'2020-10-21 12:16'"
+        :theme="'light'" 
+        :chartsType="'bar'" 
+        :haveHeader="true">
+      </charts-preview>
+    </div>
+    <!-- 堆叠图 -->
+    <div class="charts-box" style="width:550px;">
+      <charts-preview 
+        :options="stackData" 
+        :chartsName="'堆叠图'"
+        :updateTime="'2020-10-21 12:16'"
+        :theme="'light'" 
+        :chartsType="'stack'" 
+        :haveHeader="true">
+      </charts-preview>
+    </div>
+    <!-- 饼图 -->
+    <div class="charts-box">
+      <charts-preview 
+        :options="pieData" 
+        :chartsName="'饼图'"
+        :updateTime="'2020-10-21 12:16'"
+        :theme="'light'" 
+        :chartsType="'pie'" 
+        :haveHeader="true">
+      </charts-preview>
+    </div>
+    <!-- 折线图 -->
+    <div class="charts-box">
+      <charts-preview 
+        :options="lineData" 
+        :chartsName="'折现图'"
+        :updateTime="'2020-10-21 12:16'"
+        :theme="'light'" 
+        :chartsType="'line'" 
+        :haveHeader="true">
+      </charts-preview>
+    </div>
   </div>
 </template>
 
 <script>
+import stacked from './assets/mock/stacked'
+import pieInfo from './assets/mock/pie'
 export default {
   name: 'app',
   data () {
@@ -14,64 +58,75 @@ export default {
         height: '400px',
         width: '400px'
       },
-      pieData: {
-        title : {
-            text: '会员数据统计',
-            subtext: '动态数据',
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            show: true,
-            orient: 'vertical',
-            left: 'left',
-            data: ['微信访问','公众号访问','扫码进入','分享进入','搜索访问']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'微信访问'},
-                    {value:310, name:'公众号访问'},
-                    {value:234, name:'扫码进入'},
-                    {value:135, name:'分享进入'},
-                    {value:1548, name:'搜索访问'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-         ]
+      barData: {
+          title: {
+              text: '世界人口总量',
+              subtext: '数据来自网络'
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                  type: 'shadow'
+              }
+          },
+          legend: {
+              data: ['2011年', '2012年']
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+          },
+          xAxis: {
+              type: 'value',
+              boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+              type: 'category',
+              data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
+          },
+          series: [
+              {
+                  name: '2011年',
+                  type: 'bar',
+                  data: [18203, 23489, 29034, 104970, 131744, 630230]
+              },
+              {
+                  name: '2012年',
+                  type: 'bar',
+                  data: [19325, 23438, 31000, 121594, 134141, 681807]
+              }
+          ]
       },
       lineData: {
-        title: {
-            text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-            data:['销量']
-        },
         xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
-        yAxis: {},
+        yAxis: {
+            type: 'value'
+        },
         series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: true
         }]
       }
     }
+  },
+
+  computed: {
+    pieData: function () {
+      return pieInfo
+    },
+    stackData: function () {
+      return stacked
+    }
+  },
+
+  created () {
+    console.log(stacked, 'stacked-=-=-==-')
   }
 }
 </script>
@@ -83,26 +138,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  border:1px solid #ccc;
+  padding: 5px;
+}
+.charts-box{
   width: 400px;
   height: 300px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+  float: left;
+  margin: 10px 10px 0 0;
+  border: 1px solid #ccc;
 }
 </style>

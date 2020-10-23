@@ -1,11 +1,11 @@
 <!-- 基于vue-echarts的图表预览组件 -->
 <template>
   <div class="charts-preview-wrap">
-    <slot name="title"></slot>
-    <span class="chatrs-name">{{ chartsName }}</span>
-    <span class="chatrs-update">数据更新时间：{{ updateTime }}</span>
+    <!-- 图表头部 -->
+    <chart-header v-bind="$attrs" v-if="haveHeader"></chart-header>
+    
     <!-- echarts图表 -->
-    <commom-charts v-bind="$attrs"></commom-charts>
+    <commom-charts v-bind="$attrs" class="charts-wrap" :style="initStyle"></commom-charts>
     <!-- 交叉表 -->
     <!-- 副文本 图表 -->
     <!-- 指标卡-->
@@ -15,20 +15,16 @@
 
 <script>
 import commomCharts from './components/commom-charts'
+import chartHeader from './components/chart-header'
 export default {
   name: 'chartsPreview',
 
   props: {
-    chartsName: {
-      type: String,
-      default: '图表名称'
+    // 是否需要头部
+    haveHeader: {
+      type: Boolean,
+      default: true
     },
-
-    updateTime: {
-      type: String,
-      default: '2020-10-21 12:16'
-    },
-
     // 指定图表样式
     styleOptions: {
       type: Object,
@@ -37,9 +33,14 @@ export default {
   },
 
   computed: {
+    initStyle: function () {
+      // 没有头部的时候图表高度不需要缩进
+      if (!this.haveHeader) return { height: '100%' }
+    }
   },
   
   components: {
+    chartHeader,
     commomCharts
   },
 
@@ -63,20 +64,7 @@ export default {
 
   .charts-wrap{
     width:100%;
-    height: 100%;
-  }
-  .chatrs-name{
-    font-size:13px;
-    font-weight: bold;
-    position: absolute;
-    top:5px;
-    left: 5px;
-  }
-  .chatrs-update{
-    font-size: 12px;
-    position: absolute;
-    top: 6px;
-    right: 5px;
+    height: calc(~"100% - 26px");
   }
 }
 </style>
