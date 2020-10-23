@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <charts-preview :data="pieData" :options="pieData" :theme="'light'">
+    <charts-preview :data="pieData" :options="pieData" :theme="'light'" :chartsType="'pie'">
     </charts-preview>
   </div>
 </template>

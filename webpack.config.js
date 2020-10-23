@@ -45,7 +45,7 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           path.resolve('src'),
-          path.resolve('node_modules/vue-echarts'),
+          path.resolve('node_modules/vue-echarts'), //echarts部分依赖使用ES6语法，webpack要把node_modules对应的echarts进行es5转化,不能过滤掉node_nodules的js
           path.resolve('node_modules/resize-detector')
         ]
       },

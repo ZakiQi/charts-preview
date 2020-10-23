@@ -4,25 +4,21 @@
     <slot name="title"></slot>
     <span class="chatrs-name">{{ chartsName }}</span>
     <span class="chatrs-update">数据更新时间：{{ updateTime }}</span>
-    <v-chart class="charts-wrap"  v-bind="$attrs" :style="chartsStyleOptions"></v-chart>
+    <!-- echarts图表 -->
+    <commom-charts v-bind="$attrs"></commom-charts>
+    <!-- 交叉表 -->
+    <!-- 副文本 图表 -->
+    <!-- 指标卡-->
+    <!-- 全局过滤器 -->
   </div>
 </template>
 
 <script>
-import ECharts from "vue-echarts";
-import "echarts/lib/chart/bar";
-import "echarts/lib/chart/line";
-import "echarts/lib/chart/pie";
-
+import commomCharts from './components/commom-charts'
 export default {
   name: 'chartsPreview',
 
   props: {
-    data: {
-      type: Object,
-      default: () => {}
-    },
-
     chartsName: {
       type: String,
       default: '图表名称'
@@ -39,22 +35,22 @@ export default {
       default: () => {}
     }
   },
+
   computed: {
-    chartsStyleOptions () {
-      return this.styleOptions || {}
-    }
   },
   
   components: {
-    'v-chart': ECharts
+    commomCharts
   },
 
   data () {
     return {
+      typeArr: ['cross', 'text']
     }
   },
 
   created () {
+    // console.log(this.$attrs, 'this')
   }
 }
 </script>
@@ -66,8 +62,6 @@ export default {
   height: 100%;
 
   .charts-wrap{
-    // width: 100px;
-    // height: 300px;
     width:100%;
     height: 100%;
   }
