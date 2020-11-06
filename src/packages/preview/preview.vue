@@ -5,9 +5,10 @@
     <chart-header v-bind="$attrs" v-if="haveHeader"></chart-header>
     
     <!-- echarts图表 -->
-    <commom-charts v-bind="$attrs" class="charts-wrap" :style="initStyle"></commom-charts>
+    <commom-charts v-bind="$attrs" class="charts-wrap" :style="initStyle" v-if="commonCharts.includes(chartsType)"></commom-charts>
     <!-- 交叉表 -->
     <!-- 副文本 图表 -->
+    <rich-charts v-bind="$attrs" v-if="chartsType === 'rich'"></rich-charts>
     <!-- 指标卡-->
     <!-- 全局过滤器 -->
   </div>
@@ -16,6 +17,8 @@
 <script>
 import commomCharts from './components/commom-charts'
 import chartHeader from './components/chart-header'
+import richCharts from './components/rich-charts'
+
 export default {
   name: 'chartsPreview',
 
@@ -29,6 +32,11 @@ export default {
     styleOptions: {
       type: Object,
       default: () => {}
+    },
+
+    // 图表类型
+    chartsType: {
+      type: String
     }
   },
 
@@ -41,12 +49,13 @@ export default {
   
   components: {
     chartHeader,
-    commomCharts
+    commomCharts,
+    richCharts
   },
 
   data () {
     return {
-      typeArr: ['cross', 'text']
+      commonCharts: ['bar', 'pie', 'line', 'stack']
     }
   },
 

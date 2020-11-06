@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <!-- 文本 -->
+    <div class="charts-box">
+      <charts-preview 
+        :text="text"
+        :insSetup="{backgroundColor: '#2B3651'}"
+        :theme="'light'" 
+        :chartsType="'rich'"
+        :haveHeader="false">
+      </charts-preview>
+    </div>
     <!-- 柱状图 -->
     <div class="charts-box">
       <charts-preview 
@@ -7,8 +17,7 @@
         :chartsName="'柱状图'"
         :updateTime="'2020-10-21 12:16'"
         :theme="'light'" 
-        :chartsType="'bar'" 
-        :haveHeader="true">
+        :chartsType="'bar'">
       </charts-preview>
     </div>
     <!-- 堆叠图 -->
@@ -18,8 +27,7 @@
         :chartsName="'堆叠图'"
         :updateTime="'2020-10-21 12:16'"
         :theme="'light'" 
-        :chartsType="'stack'" 
-        :haveHeader="true">
+        :chartsType="'stack'">
       </charts-preview>
     </div>
     <!-- 饼图 -->
@@ -54,6 +62,7 @@ export default {
   name: 'app',
   data () {
     return {
+      text: '<p><span style="font-family: 微软雅黑; font-size: 24px; font-weight: 700; white-space: normal;color:#ffffff">基本面客户趋势分析</span></p>',
       styleOptions: {
         height: '400px',
         width: '400px'

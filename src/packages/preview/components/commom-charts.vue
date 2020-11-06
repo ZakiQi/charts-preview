@@ -11,6 +11,10 @@ import "echarts/lib/chart/bar"
 import "echarts/lib/chart/line"
 import "echarts/lib/chart/pie"
 
+import gridFunc from '@/assets/common/grid'
+
+gridFunc.calcGrid()
+
 export default {
   props: {
     // 指定图表样式
